@@ -1,53 +1,27 @@
-modLoader="javafml" #mandatory
-loaderVersion="[36,)" #mandatory 
-# The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
+modLoader="javafml"
+loaderVersion="[36,)"
 license="MIT License"
+issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+[[mods]]
+modId="rubber_duck"
+version="1.0"
+displayName="Rubber Duck"
+#updateJSONURL=""
+displayURL="https://github.com/salvadormg15/Rubber-Duck"
+logoFile="rubber_duck.png"
+authors="Salvadormg15"
+description="We just need a Rubber Duck to be happy"
 
-[[mods]] #mandatory
-modId="rubber_duck" #mandatory
-# The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-# ${file.jarVersion} will substitute the value of the Implementation-Version as read from the mod's JAR file metadata
-# see the associated build.gradle script for how to populate this completely automatically during a build
-version="1.0" #mandatory
- 
-displayName="Rubber Duck" #mandatory
-
-# A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
-#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
-# A URL for the "homepage" for this mod, displayed in the mod UI
-#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
-
-# A file name (in the root of the mod JAR) containing a logo for display
-logoFile="rubber_duck.png" #optional
-# A text field displayed in the mod UI
-# credits="" #optional
-# A text field displayed in the mod UI
-authors="Salvadormg15" #optional
-# The description text for the mod (multi line!) (#mandatory)
-description='''
-THis is my first mod, I hope you enjoy it.
-
-If you want to send me your suggestions, feel free to contact me on msalvadormg@gmail.com
-'''
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.rubber_duck]] #optional
-    # the modid of the dependency
-    modId="forge" #mandatory
-    # Does this dependency have to exist - if not, ordering below must be specified
-    mandatory=true #mandatory
-    # The version range of the dependency
-    versionRange="[36,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+[[dependencies.rubber_duck]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
     ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
-# Here's another dependency
 [[dependencies.rubber_duck]]
     modId="minecraft"
     mandatory=true
-# This version range declares a minimum of the current minecraft version up to but not including the next major version
     versionRange="[1.16.5,1.17)"
     ordering="NONE"
     side="BOTH"
