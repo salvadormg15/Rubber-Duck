@@ -15,13 +15,16 @@ public class RubberDuck
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "rubber_duck";
-    
 
     public RubberDuck() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
     	bus.addListener(this::setup);
+    	Registries.BLOCKS.register(bus);
+    	Registries.ITEMS.register(bus);
+    	Registries.SOUND_EVENTS.register(bus);
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(ForgeEventHandler.class);
     }
 
     private void setup(final FMLCommonSetupEvent event)
