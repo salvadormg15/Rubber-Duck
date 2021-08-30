@@ -6,4 +6,4 @@
 <p>I hope you enjoy it!</p>
 <p>You can use this mod for your modpacks.</p>
 <p><img src="https://i.imgur.com/y6Nj3us.jpg" alt="Rubber Duck ingame" width="50%" /></p>
-<p><iframe allowfullscreen="allowfullscreen" src="https://www.youtube.com/embed/_5uGYPgpjC8?wmode=transparent" height="358" width="638"></iframe></p>
+https://www.youtube.com/embed/_5uGYPgpjC8>
