@@ -7,7 +7,7 @@
         "entries": [
           {
             "type": "minecraft:item",
-            "name": "rubber_duck:rubber_duck_item"
+            "name": "minecraft:dirt"
           }
         ],
         "conditions": [
