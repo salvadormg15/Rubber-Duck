@@ -59,9 +59,11 @@ public class ForgeEventHandler {
 
 	@SubscribeEvent
 	public static void onLootLoad(LootTableLoadEvent event) {
-		if (event.getName().equals(new ResourceLocation("chests/desert_pyramid"))) {
+		String chestName = event.getName().toString().substring(0,16);
+		String wantedName = "minecraft:chests";
+		if (chestName.equals(wantedName)) {
 			event.getTable().addPool(LootPool.lootPool()
-					.add(TableLootEntry.lootTableReference(new ResourceLocation(RubberDuck.MODID, "chest/rubber_duck")))
+					.add(TableLootEntry.lootTableReference(new ResourceLocation(RubberDuck.MODID, "chests/rubber_duck")))
 					.build());
 		}
 	}
