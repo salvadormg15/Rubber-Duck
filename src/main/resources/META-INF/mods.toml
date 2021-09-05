@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 
 [[mods]]
 modId="rubber_duck"
-version="${mod_version}"
+version="1.0.2"
 displayName="Rubber Duck"
 #updateJSONURL="https://raw.githubusercontent.com/salvadormg15/Rubber-Duck/main/changelog.json"
 displayURL="https://github.com/salvadormg15/Rubber-Duck"
