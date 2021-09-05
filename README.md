@@ -6,4 +6,5 @@
 <p>I hope you enjoy it!</p>
 <p>You can use this mod for your modpacks.</p>
 <p><img src="https://i.imgur.com/y6Nj3us.jpg" alt="Rubber Duck ingame" width="50%" /></p>
-https://www.youtube.com/embed/_5uGYPgpjC8>
+
+<p><a href="https://www.curseforge.com/minecraft/mc-mods/rubber-duck">More on curseforge!!</a></p>
