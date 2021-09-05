@@ -99,7 +99,7 @@ private static Map<Direction, VoxelShape> SHAPES = new HashMap<Direction, VoxelS
 	}
 	
 //	Configs
-	private static double onEntitySpawnChance = 0.02;
+	private static double onEntitySpawnChance = 0.04;
 	public static double getOnEntitySpawnChance(){
 		return onEntitySpawnChance;
 	}
