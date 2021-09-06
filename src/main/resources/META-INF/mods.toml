@@ -4,14 +4,14 @@ license="MIT License"
 issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 
 [[mods]]
-modId="rubber_duck"
-version="1.1.0"
-displayName="Rubber Duck"
-updateJSONURL="https://raw.githubusercontent.com/salvadormg15/Rubber-Duck/main/changelog.json"
-displayURL="https://github.com/salvadormg15/Rubber-Duck"
-logoFile="rubber_duck.png"
-authors="Salvadormg15"
-description="We just need a Rubber Duck to be happy"
+    modId="rubber_duck"
+    version="1.1.0"
+    displayName="Rubber Duck"
+    updateJSONURL="https://raw.githubusercontent.com/salvadormg15/Rubber-Duck/main/changelog.json"
+    displayURL="https://github.com/salvadormg15/Rubber-Duck"
+    logoFile="rubber_duck.png"
+    authors="Salvadormg15"
+    description="We just need a Rubber Duck to be happy"
 
 [[dependencies.rubber_duck]]
     modId="forge"
