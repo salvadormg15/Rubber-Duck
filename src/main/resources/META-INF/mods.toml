@@ -1,11 +1,11 @@
 modLoader="javafml"
-loaderVersion="[36,)"
+loaderVersion="[37,)"
 license="MIT License"
 issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 
 [[mods]]
     modId="rubber_duck"
-    version="1.1.0"
+    version="2.0.0"
     displayName="Rubber Duck"
     updateJSONURL="https://raw.githubusercontent.com/salvadormg15/Rubber-Duck/main/changelog.json"
     displayURL="https://github.com/salvadormg15/Rubber-Duck"
@@ -16,12 +16,12 @@ issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 [[dependencies.rubber_duck]]
     modId="forge"
     mandatory=true
-    versionRange="[${forge_version},)"
+    versionRange="[37.0.0,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.rubber_duck]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5,1.17)"
+    versionRange="[1.17.1, 1.18)"
     ordering="NONE"
     side="BOTH"

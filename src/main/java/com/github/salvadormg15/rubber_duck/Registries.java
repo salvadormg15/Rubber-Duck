@@ -1,13 +1,13 @@
 package com.github.salvadormg15.rubber_duck;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Rarity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -24,7 +24,7 @@ public class Registries {
 	// Items
 	public static final RegistryObject<BlockItem> RUBBER_DUCK_ITEM = ITEMS.register("rubber_duck_item",
 			() -> new BlockItem(RUBBER_DUCK_BLOCK.get(),
-					new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(4).rarity(Rarity.RARE)));
+					new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(4).rarity(Rarity.RARE)));
 	// Sound Events
 	public static final RegistryObject<SoundEvent> RUBBER_DUCK_USE = SOUND_EVENTS.register("rubber_duck_use",
 			() -> new SoundEvent(new ResourceLocation(RubberDuck.MODID, "rubber_duck_use")));
