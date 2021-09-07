@@ -1,6 +1,7 @@
 <h2>Rubber Duck</h2>
 <p>This mod just adds an usable Rubber duck.</p>
-<p>The duck spawns in zombies and skeletons with a low probability, being the only obtainable form.</p>
+<p>The duck spawns in zombies and skeletons with a low probability.</p>
+<p>It can also be obtainable in dungeon chests.</p>
 <p>&nbsp;</p>
 <p>I hope you enjoy it!</p>
 <p>You can use this mod for your modpacks.</p>
