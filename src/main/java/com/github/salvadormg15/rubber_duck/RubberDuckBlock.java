@@ -16,6 +16,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -27,12 +28,14 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.TickPriority;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class RubberDuckBlock extends RedstoneDiodeBlock {
 	public static final BooleanProperty TRIGGERED = BlockStateProperties.TRIGGERED;
+	public static final BooleanProperty UNLOCK = BooleanProperty.create("unlock");
 
 	public RubberDuckBlock() {
 		super(Properties.of(Material.BAMBOO).strength(0.2f, 0.2f));
@@ -40,6 +43,7 @@ public class RubberDuckBlock extends RedstoneDiodeBlock {
 			this.stateDefinition.any()
 				.setValue(POWERED, Boolean.valueOf(false))
 				.setValue(TRIGGERED, Boolean.valueOf(false))
+				.setValue(UNLOCK, Boolean.valueOf(false))
 				.setValue(FACING, Direction.NORTH)
 		);
 		runCalculations(SHAPE);
@@ -47,7 +51,7 @@ public class RubberDuckBlock extends RedstoneDiodeBlock {
 
 	@Override
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
-		builder.add(POWERED, TRIGGERED, FACING);
+		builder.add(POWERED, TRIGGERED, UNLOCK, FACING);
 	}
 
 //  Redstone behavior
@@ -59,40 +63,107 @@ public class RubberDuckBlock extends RedstoneDiodeBlock {
 	}
 
 	public void press(BlockState p_226910_1_, World p_226910_2_, BlockPos p_226910_3_) {
-		p_226910_2_.setBlock(p_226910_3_, p_226910_1_.setValue(POWERED, Boolean.valueOf(true)).setValue(TRIGGERED, Boolean.valueOf(true)), 3);
-		p_226910_2_.getBlockTicks().scheduleTick(p_226910_3_, this, this.getPressDuration());
+		p_226910_2_.setBlock(
+			p_226910_3_,
+			p_226910_1_
+				.setValue(POWERED, Boolean.valueOf(true))
+				.setValue(TRIGGERED, Boolean.valueOf(true)),
+			3);
+		this.updateNeighbors(p_226910_2_, p_226910_3_, p_226910_1_);
+		p_226910_2_.getBlockTicks().scheduleTick(p_226910_3_, this, 0);
 	}
 
-	@Override
-	protected void updateNeighborsInFront(World p_176400_1_, BlockPos p_176400_2_, BlockState p_176400_3_) {
+	protected void updateNeighbors(World p_176400_1_, BlockPos p_176400_2_, BlockState p_176400_3_) {
 		for (Direction direction : Direction.values()) {
-			if (net.minecraftforge.event.ForgeEventFactory.onNeighborNotify(p_176400_1_, p_176400_2_, p_176400_1_.getBlockState(p_176400_2_), java.util.EnumSet.of(direction.getOpposite()), false).isCanceled())
+			if (net.minecraftforge.event.ForgeEventFactory.onNeighborNotify(p_176400_1_, p_176400_2_, p_176400_1_.getBlockState(p_176400_2_), java.util.EnumSet.of(direction), false).isCanceled())
 				return;
-			BlockPos blockpos = p_176400_2_.relative(direction.getOpposite());
+			BlockPos blockpos = p_176400_2_.relative(direction);
 			p_176400_1_.neighborChanged(blockpos, this, p_176400_2_);
-			p_176400_1_.updateNeighborsAtExceptFromFacing(blockpos, this, direction);
+			p_176400_1_.updateNeighborsAtExceptFromFacing(blockpos, this, direction.getOpposite());
 		}
 	}
 
 	@Override
+	protected void updateNeighborsInFront(World p_176400_1_, BlockPos p_176400_2_, BlockState p_176400_3_) {
+		this.updateNeighbors(p_176400_1_, p_176400_2_, p_176400_3_);
+	}
+
+	@Override
 	public void tick(BlockState p_225534_1_, ServerWorld p_225534_2_, BlockPos p_225534_3_, Random p_225534_4_) {
-		if (!this.isLocked(p_225534_2_, p_225534_3_, p_225534_1_)) {
-			boolean flag = p_225534_1_.getValue(TRIGGERED);
-			boolean flag1 = this.shouldTurnOn(p_225534_2_, p_225534_3_, p_225534_1_);
-			if (flag && !flag1) {
-				p_225534_2_.setBlock(p_225534_3_, p_225534_1_.setValue(TRIGGERED, Boolean.valueOf(false)), 2);
-			} else if (!flag) {
-				p_225534_2_.playSound(null, p_225534_3_, Registries.RUBBER_DUCK_USE.get(), SoundCategory.BLOCKS, 1.3f, 1f);
-				p_225534_2_.setBlock(p_225534_3_, p_225534_1_.setValue(TRIGGERED, Boolean.valueOf(true)), 2);
-				if (!flag1) {
-					p_225534_2_.getBlockTicks().scheduleTick(p_225534_3_, this, this.getDelay(p_225534_1_), TickPriority.VERY_HIGH);
+		if (!this.isLocked(p_225534_2_, p_225534_3_, p_225534_1_) || p_225534_1_.getValue(UNLOCK)) {
+			boolean unlocked = p_225534_1_.getValue(UNLOCK);
+			boolean powered = p_225534_1_.getValue(POWERED);
+			boolean triggered = p_225534_1_.getValue(TRIGGERED);
+
+			boolean setPowered = false;
+			boolean setNewState = false;
+			boolean setScheduleTick = false;
+
+			TickPriority tickPriority = TickPriority.NORMAL;
+
+			boolean playSound = false;
+
+			int delay = getDelay(p_225534_1_);
+
+			BlockState newState = p_225534_1_;
+
+			if (unlocked) {
+				setNewState = true;
+				newState = newState.setValue(UNLOCK, Boolean.valueOf(false));
+			}
+
+			if (powered) {
+				List<? extends Entity> list = p_225534_2_.getEntitiesOfClass(AbstractArrowEntity.class, p_225534_1_.getShape(p_225534_2_, p_225534_3_).bounds().move(p_225534_3_));
+				boolean flag = !list.isEmpty();
+
+				if (flag != powered) {
+					setPowered = true;
+					setNewState = true;
+					newState = newState.setValue(POWERED, Boolean.valueOf(flag));
+				}
+
+				if (flag) {
+					setScheduleTick = true;
+					delay = this.getPressDuration();
 				}
 			}
 
-			boolean powered = p_225534_1_.getValue(POWERED);
-			if (powered && !p_225534_2_.getBlockTicks().willTickThisTick(p_225534_3_, this)) {
-				this.checkPressed(p_225534_1_, p_225534_2_, p_225534_3_);
+			boolean flag1 = this.shouldTurnOn(p_225534_2_, p_225534_3_, p_225534_1_);
+
+			if (!setPowered) {
+				if (!powered) {
+					if (triggered && !flag1) {
+						setNewState = true;
+						newState = newState.setValue(TRIGGERED, Boolean.valueOf(false));
+					} else if (!triggered) {
+						playSound = true;
+						setNewState = true;
+						newState = newState.setValue(TRIGGERED, Boolean.valueOf(true));
+
+						if (!flag1) {
+							setScheduleTick = true;
+							tickPriority = TickPriority.VERY_HIGH;
+						}
+					}
+				}
+			} else {
+				setScheduleTick = true;
 			}
+
+			if (playSound) {
+				p_225534_2_.playSound(null, p_225534_3_, Registries.RUBBER_DUCK_USE.get(), SoundCategory.BLOCKS, 1.3f, 1f);
+			}
+
+			if (setNewState) {
+				p_225534_2_.setBlock(p_225534_3_, newState, setPowered ? 3 : 2);
+			}
+
+			if (setScheduleTick) {
+				p_225534_2_.getBlockTicks().scheduleTick(new BlockPos(p_225534_3_), this, delay, tickPriority);
+			}
+		} else {
+			p_225534_2_.setBlock(p_225534_3_, p_225534_1_.setValue(UNLOCK, Boolean.valueOf(true)), 2);
+			p_225534_2_.getBlockTicks().scheduleTick(new BlockPos(p_225534_3_), this, this.getPressDuration());
 		}
 	}
 
@@ -107,8 +178,16 @@ public class RubberDuckBlock extends RedstoneDiodeBlock {
 		List<? extends Entity> list = p_185616_2_.getEntitiesOfClass(AbstractArrowEntity.class, p_185616_1_.getShape(p_185616_2_, p_185616_3_).bounds().move(p_185616_3_));
 		boolean flag = !list.isEmpty();
 		boolean flag1 = p_185616_1_.getValue(POWERED);
+		BlockState newState = p_185616_1_;
+
 		if (flag != flag1) {
-			p_185616_2_.setBlock(p_185616_3_, p_185616_1_.setValue(POWERED, Boolean.valueOf(flag)), 3);
+			if (flag) {
+				p_185616_2_.playSound(null, p_185616_3_, Registries.RUBBER_DUCK_USE.get(), SoundCategory.BLOCKS, 1.3f, 1f);
+				newState = newState.setValue(TRIGGERED, Boolean.valueOf(true));
+			}
+
+			newState = newState.setValue(POWERED, Boolean.valueOf(flag));
+			p_185616_2_.setBlock(p_185616_3_, newState, 3);
 		}
 
 		if (flag) {
@@ -119,6 +198,11 @@ public class RubberDuckBlock extends RedstoneDiodeBlock {
 
 	private int getPressDuration() {
 		return 20;
+	}
+
+	@Override
+	public boolean isLocked(IWorldReader p_176405_1_, BlockPos p_176405_2_, BlockState p_176405_3_) {
+		return p_176405_3_.getValue(POWERED);
 	}
 
 	@Override
@@ -136,7 +220,6 @@ public class RubberDuckBlock extends RedstoneDiodeBlock {
 
 				p_176398_1_.getBlockTicks().scheduleTick(p_176398_2_, this, this.getDelay(p_176398_3_), tickpriority);
 			}
-
 		}
 	}
 
@@ -157,7 +240,7 @@ public class RubberDuckBlock extends RedstoneDiodeBlock {
 
 	@Override
 	protected int getDelay(BlockState p_196346_1_) {
-		return 0;
+		return 2;
 	}
 
 //	Block behavior
