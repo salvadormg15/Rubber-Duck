@@ -5,9 +5,9 @@ issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 
 [[mods]]
     modId="rubber_duck"
-    version="1.1.0"
+    version="1.1.1"
     displayName="Rubber Duck"
-    updateJSONURL="https://raw.githubusercontent.com/salvadormg15/Rubber-Duck/main/changelog.json"
+    updateJSONURL="https://gist.githubusercontent.com/salvadormg15/f73e087096fbc1718d101c6d61389352/raw/"
     displayURL="https://github.com/salvadormg15/Rubber-Duck"
     logoFile="rubber_duck.png"
     authors="Salvadormg15"
@@ -16,7 +16,7 @@ issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 [[dependencies.rubber_duck]]
     modId="forge"
     mandatory=true
-    versionRange="[${forge_version},)"
+    versionRange="[36,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.rubber_duck]]
