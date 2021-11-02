@@ -1,6 +1,9 @@
-package com.github.salvadormg15.rubber_duck;
+package com.github.salvadormg15.rubber_duck.common.core;
 
 import java.util.Random;
+
+import com.github.salvadormg15.rubber_duck.common.RubberDuck;
+import com.github.salvadormg15.rubber_duck.common.RubberDuckBlock;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;

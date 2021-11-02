@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 
 [[mods]]
     modId="rubber_duck"
-    version="1.2.0"
+    version="2.0.0-a"
     displayName="Rubber Duck"
     updateJSONURL="https://gist.githubusercontent.com/salvadormg15/f73e087096fbc1718d101c6d61389352/raw/"
     displayURL="https://www.curseforge.com/minecraft/mc-mods/rubber-duck"
@@ -29,3 +29,5 @@ issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
     modId="curios"
     mandatory=true
     versionRange="[1.16.5-4.0.5.3,)"
+    ordering="NONE"
+    side="BOTH"

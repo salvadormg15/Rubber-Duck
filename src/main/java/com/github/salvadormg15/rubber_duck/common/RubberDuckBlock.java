@@ -1,10 +1,12 @@
-package com.github.salvadormg15.rubber_duck;
+package com.github.salvadormg15.rubber_duck.common;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.stream.Stream;
+
+import com.github.salvadormg15.rubber_duck.common.core.Registries;
 
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
