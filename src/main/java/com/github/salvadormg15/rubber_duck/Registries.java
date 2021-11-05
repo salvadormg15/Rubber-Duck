@@ -1,10 +1,7 @@
-package com.github.salvadormg15.rubber_duck.common.core;
-
-import com.github.salvadormg15.rubber_duck.common.RubberDuck;
-import com.github.salvadormg15.rubber_duck.common.RubberDuckBlock;
-import com.github.salvadormg15.rubber_duck.common.RubberDuckItem;
+package com.github.salvadormg15.rubber_duck;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
@@ -25,8 +22,8 @@ public class Registries {
 	public static final RegistryObject<RubberDuckBlock> RUBBER_DUCK_BLOCK = BLOCKS.register("rubber_duck_block",
 			() -> new RubberDuckBlock());
 	// Items
-	public static final RegistryObject<RubberDuckItem> RUBBER_DUCK_ITEM = ITEMS.register("rubber_duck_item",
-			() -> new RubberDuckItem(RUBBER_DUCK_BLOCK.get(),
+	public static final RegistryObject<BlockItem> RUBBER_DUCK_ITEM = ITEMS.register("rubber_duck_item",
+			() -> new BlockItem(RUBBER_DUCK_BLOCK.get(),
 					new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(4).rarity(Rarity.RARE)));
 	// Sound Events
 	public static final RegistryObject<SoundEvent> RUBBER_DUCK_USE = SOUND_EVENTS.register("rubber_duck_use",
