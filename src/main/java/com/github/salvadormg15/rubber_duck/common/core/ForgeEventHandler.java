@@ -20,6 +20,8 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ForgeEventHandler {
+	
+	//Duck Spawn Event
 	@SubscribeEvent
 	public static void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
 		LivingEntity entity = event.getEntityLiving();
@@ -34,6 +36,7 @@ public class ForgeEventHandler {
 		}
 	}
 
+	//100% duck drop probability
 	@SubscribeEvent
 	public static void onDeathSpecialEvent(LivingDropsEvent event) {
 		LivingEntity entity = event.getEntityLiving();
@@ -60,6 +63,7 @@ public class ForgeEventHandler {
 		}
 	}
 
+	//Generation on chests
 	@SubscribeEvent
 	public static void onLootLoad(LootTableLoadEvent event) {
 		String chestName = event.getName().toString().substring(0,16);
