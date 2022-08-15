@@ -1,5 +1,6 @@
 package com.github.salvadormg15.rubber_duck.common;
 
+import com.github.salvadormg15.rubber_duck.client.render.curio.CurioRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,7 +19,6 @@ import top.theillusivec4.curios.api.SlotTypePreset;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.github.salvadormg15.rubber_duck.client.ClientEventHandler;
 import com.github.salvadormg15.rubber_duck.common.core.ForgeEventHandler;
 import com.github.salvadormg15.rubber_duck.common.core.Registries;
 // The value here should match an entry in the META-INF/mods.toml file
@@ -48,7 +48,7 @@ public class RubberDuck
     
     private void clientSetup(final FMLClientSetupEvent event){
     	if(FMLEnvironment.dist == Dist.CLIENT) {
-    		ClientEventHandler.initClient(FMLJavaModLoadingContext.get().getModEventBus(), MinecraftForge.EVENT_BUS);
+            CurioRenderers.register();
     	}
     }
     
@@ -57,8 +57,7 @@ public class RubberDuck
     		LOGGER.error("Cannot find Curios in modloading");
     		return;
     	}
-    	InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HEAD.getMessageBuilder().build());
-    	
+    	InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HEAD.getMessageBuilder().cosmetic().build());
     }
 }
 
