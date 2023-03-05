@@ -5,15 +5,15 @@ import java.util.Random;
 import com.github.salvadormg15.rubber_duck.common.RubberDuck;
 import com.github.salvadormg15.rubber_duck.common.RubberDuckBlock;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.monster.SkeletonEntity;
-import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.TableLootEntry;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -25,12 +25,12 @@ public class ForgeEventHandler {
 	@SubscribeEvent
 	public static void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
 		LivingEntity entity = event.getEntityLiving();
-		if (entity instanceof ZombieEntity || entity instanceof SkeletonEntity) {
+		if (entity instanceof Zombie || entity instanceof Skeleton) {
 			Random random = event.getWorld().getRandom();
 			double chance = random.nextDouble();
 			if (chance <= RubberDuckBlock.getOnEntitySpawnChance()) {
-				if (entity.getItemBySlot(EquipmentSlotType.HEAD).isEmpty()) {
-					entity.setItemSlot(EquipmentSlotType.HEAD, Registries.RUBBER_DUCK_ITEM.get().getDefaultInstance());
+				if (entity.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
+					entity.setItemSlot(EquipmentSlot.HEAD, Registries.RUBBER_DUCK_ITEM.get().getDefaultInstance());
 				}
 			}
 		}
@@ -42,10 +42,10 @@ public class ForgeEventHandler {
 		LivingEntity entity = event.getEntityLiving();
 		BlockPos pos = entity.blockPosition();
 		// If it's not a zombie or skeleton returns
-		if (!(entity instanceof ZombieEntity || entity instanceof SkeletonEntity)) {
+		if (!(entity instanceof Zombie || entity instanceof Skeleton)) {
 			return;
 		}
-		if (entity.getItemBySlot(EquipmentSlotType.HEAD).getItem().getRegistryName().getPath()
+		if (entity.getItemBySlot(EquipmentSlot.HEAD).getItem().getRegistryName().getPath()
 				.equals(Registries.RUBBER_DUCK_ITEM.get().getRegistryName().getPath())) {
 			ItemEntity item = new ItemEntity(entity.level, pos.getX(), pos.getY(), pos.getZ(),
 					Registries.RUBBER_DUCK_ITEM.get().getDefaultInstance());
@@ -70,7 +70,7 @@ public class ForgeEventHandler {
 		String wantedName = "minecraft:chests";
 		if (chestName.equals(wantedName)) {
 			event.getTable().addPool(LootPool.lootPool()
-					.add(TableLootEntry.lootTableReference(new ResourceLocation(RubberDuck.MODID, "chests/rubber_duck")))
+					.add(LootTableReference.lootTableReference(new ResourceLocation(RubberDuck.MODID, "chests/rubber_duck")))
 					.build());
 		}
 	}

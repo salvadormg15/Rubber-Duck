@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[36,)"
+loaderVersion="[40,)"
 license="MIT License"
 issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 
@@ -16,18 +16,18 @@ issueTrackerURL="https://github.com/salvadormg15/Rubber-Duck/issues"
 [[dependencies.rubber_duck]]
     modId="forge"
     mandatory=true
-    versionRange="[36,)"
+    versionRange="[40,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.rubber_duck]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5,1.17)"
+    versionRange="[1.18.2,1.19)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.rubber_duck]]
     modId="curios"
     mandatory=true
-    versionRange="[1.16.5-4.0.5.3,)"
+    versionRange="[1.18.2-5.0.7.1,)"
     ordering="NONE"
     side="BOTH"
