@@ -48,7 +48,8 @@ public class DuckHeadLayer<T extends LivingEntity, M extends EntityModel<T> & IH
             	matrixStack.translate(0, -0.25D, 0);
             } else {
             	if(playerEntity.getItemBySlot(EquipmentSlotType.HEAD).getItem() instanceof RubberDuckItem) {
-            		matrixStack.translate(0, -0.25D, 0);
+            		matrixStack.translate(0, -0.425D, 0.05D);
+					matrixStack.mulPose(Vector3f.XP.rotationDegrees(20f));
             	}else {
             		matrixStack.translate(0, -0.313, 0);
             	}
