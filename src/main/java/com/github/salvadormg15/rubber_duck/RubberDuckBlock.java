@@ -1,4 +1,4 @@
-package com.github.salvadormg15.rubber_duck.common;
+package com.github.salvadormg15.rubber_duck;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.stream.Stream;
 
-import com.github.salvadormg15.rubber_duck.common.core.Registries;
+import com.github.salvadormg15.rubber_duck.core.Registries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -292,11 +292,5 @@ public class RubberDuckBlock extends DiodeBlock {
 			buffer[1] = Shapes.empty();
 		}
 		SHAPES.put(to, buffer[0]);
-	}
-
-//	Configs
-	private static double onEntitySpawnChance = 0.04;
-	public static double getOnEntitySpawnChance(){
-		return onEntitySpawnChance;
 	}
 }
