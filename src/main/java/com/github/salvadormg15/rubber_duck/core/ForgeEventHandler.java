@@ -4,9 +4,7 @@ import java.util.Random;
 
 import com.github.salvadormg15.rubber_duck.RubberDuck;
 
-import com.github.salvadormg15.rubber_duck.config.CommonConfigs;
 import com.github.salvadormg15.rubber_duck.constants.CommonConstants;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -81,7 +79,8 @@ public class ForgeEventHandler {
 
         if (chestName.equals(wantedName)) {
             event.getTable().addPool(LootPool.lootPool()
-                    .add(LootTableReference.lootTableReference(new ResourceLocation(RubberDuck.MODID, "chests/rubber_duck")))
+                    .add(LootTableReference.lootTableReference(
+                            new ResourceLocation(RubberDuck.MODID, "chests/rubber_duck")))
                     .build());
         }
     }

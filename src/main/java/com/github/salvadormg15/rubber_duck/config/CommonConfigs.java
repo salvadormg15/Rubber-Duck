@@ -10,7 +10,7 @@ public class CommonConfigs {
     public static final ForgeConfigSpec.DoubleValue ENTITY_DROP_CHANCE;
     public static final ForgeConfigSpec.BooleanValue SPAWNABLE_ON_ZOMBIES;
     public static final ForgeConfigSpec.BooleanValue SPAWNABLE_ON_SKELETONS;
-    public static final ForgeConfigSpec.DoubleValue CHEST_RATIO;
+    public static final ForgeConfigSpec.BooleanValue CHEST_LOOT_ENABLED;
 
     
     static {
@@ -24,8 +24,8 @@ public class CommonConfigs {
         SPAWNABLE_ON_SKELETONS = BUILDER.define("Skeletons", true);
         BUILDER.pop();
 
-        CHEST_RATIO = BUILDER.comment("Chance that spawns on chests")
-                .defineInRange("ChestRatio", 0.05, 0.0, 0.2);
+        CHEST_LOOT_ENABLED = BUILDER.comment("Loot added to Vanilla chests")
+                .define("ChestLootEnabled", true);
         
         SPEC = BUILDER.build();
     }
