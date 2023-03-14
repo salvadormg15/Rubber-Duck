@@ -1,6 +1,6 @@
-package com.github.salvadormg15.rubber_duck.common;
+package com.github.salvadormg15.rubber_duck;
 
-import com.github.salvadormg15.rubber_duck.common.core.Registries;
+import com.github.salvadormg15.rubber_duck.core.Registries;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;

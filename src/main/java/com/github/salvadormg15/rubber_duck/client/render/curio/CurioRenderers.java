@@ -1,6 +1,6 @@
 package com.github.salvadormg15.rubber_duck.client.render.curio;
 
-import com.github.salvadormg15.rubber_duck.common.core.Registries;
+import com.github.salvadormg15.rubber_duck.core.Registries;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 public class CurioRenderers {

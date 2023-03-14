@@ -1,8 +1,8 @@
-package com.github.salvadormg15.rubber_duck.common.core;
+package com.github.salvadormg15.rubber_duck.core;
 
-import com.github.salvadormg15.rubber_duck.common.RubberDuck;
-import com.github.salvadormg15.rubber_duck.common.RubberDuckBlock;
-import com.github.salvadormg15.rubber_duck.common.RubberDuckItem;
+import com.github.salvadormg15.rubber_duck.RubberDuck;
+import com.github.salvadormg15.rubber_duck.RubberDuckBlock;
+import com.github.salvadormg15.rubber_duck.RubberDuckItem;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
