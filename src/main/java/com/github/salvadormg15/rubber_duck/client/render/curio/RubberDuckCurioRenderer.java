@@ -45,7 +45,9 @@ public class RubberDuckCurioRenderer implements ICurioRenderer {
             }
             matrixStack.scale(0.62F, -0.62F, -0.62F);
 
-            Minecraft.getInstance().getItemInHandRenderer().renderItem((LivingEntity)playerEntity, itemstack,
+            Minecraft.getInstance()
+                .getEntityRenderDispatcher().getItemInHandRenderer()
+                .renderItem((LivingEntity)playerEntity, itemstack,
                     ItemTransforms.TransformType.HEAD, false, matrixStack, renderTypeBuffer, light);
         }
 

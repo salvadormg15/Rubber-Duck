@@ -3,7 +3,6 @@ package com.github.salvadormg15.rubber_duck;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.stream.Stream;
 
 import com.github.salvadormg15.rubber_duck.core.Registries;
@@ -11,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -90,7 +90,7 @@ public class RubberDuckBlock extends DiodeBlock {
 	}
 
 	@Override
-	public void tick(BlockState p_225534_1_, ServerLevel p_225534_2_, BlockPos p_225534_3_, Random p_225534_4_) {
+	public void tick(BlockState p_225534_1_, ServerLevel p_225534_2_, BlockPos p_225534_3_, RandomSource p_225534_4_) {
 		if (!this.isLocked(p_225534_2_, p_225534_3_, p_225534_1_) || p_225534_1_.getValue(UNLOCK)) {
 			boolean unlocked = p_225534_1_.getValue(UNLOCK);
 			boolean powered = p_225534_1_.getValue(POWERED);
