@@ -26,7 +26,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -39,7 +40,7 @@ public class RubberDuckBlock extends DiodeBlock {
 	public static final BooleanProperty UNLOCK = BooleanProperty.create("unlock");
 
 	public RubberDuckBlock() {
-		super(Properties.of(Material.BAMBOO).strength(0.2f, 0.2f));
+		super(Properties.of().mapColor(MapColor.COLOR_YELLOW).pushReaction(PushReaction.DESTROY).strength(0.2f, 0.2f));
 		this.registerDefaultState(
 			this.stateDefinition.any()
 				.setValue(POWERED, Boolean.valueOf(false))

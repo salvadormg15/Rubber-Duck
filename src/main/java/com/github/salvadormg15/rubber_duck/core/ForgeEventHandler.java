@@ -15,14 +15,14 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ForgeEventHandler {
 
     //Duck Spawn Event
     @SubscribeEvent
-    public static void onLivingSpecialSpawn(LivingSpawnEvent.SpecialSpawn event) {
+    public static void onLivingSpecialSpawn(MobSpawnEvent.FinalizeSpawn event) {
         LivingEntity entity = event.getEntity();
         //Checks the Mod Config
         if (entity instanceof Zombie && CommonConstants.getSpawnsOnZombies() ||
@@ -50,7 +50,7 @@ public class ForgeEventHandler {
         //Has a duck equipped?
         if (entity.getItemBySlot(EquipmentSlot.HEAD).getItem().toString()
                 .equals(Registries.RUBBER_DUCK_ITEM.get().toString())) {
-            ItemEntity duckItem = new ItemEntity(entity.level, pos.getX(), pos.getY(), pos.getZ(),
+            ItemEntity duckItem = new ItemEntity(entity.level(), pos.getX(), pos.getY(), pos.getZ(),
                     Registries.RUBBER_DUCK_ITEM.get().getDefaultInstance());
 
             //Removes ducks from drop

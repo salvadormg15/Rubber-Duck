@@ -6,7 +6,6 @@ import com.github.salvadormg15.rubber_duck.RubberDuckItem;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
@@ -27,10 +26,10 @@ public class Registries {
 	// Items
 	public static final RegistryObject<RubberDuckItem> RUBBER_DUCK_ITEM = ITEMS.register("rubber_duck_item",
 			() -> new RubberDuckItem(RUBBER_DUCK_BLOCK.get(),
-					new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(4).rarity(Rarity.RARE)));
+					new Item.Properties().stacksTo(4).rarity(Rarity.RARE)));
 	// Sound Events
 	public static final RegistryObject<SoundEvent> RUBBER_DUCK_USE = SOUND_EVENTS.register("rubber_duck_use",
-			() -> new SoundEvent(new ResourceLocation(RubberDuck.MODID, "rubber_duck_use")));
+			() -> SoundEvent.createVariableRangeEvent(new ResourceLocation(RubberDuck.MODID, "rubber_duck_use")));
 	public static final RegistryObject<SoundEvent> RUBBER_DUCK_PLACE = SOUND_EVENTS.register("rubber_duck_place",
-			() -> new SoundEvent(new ResourceLocation(RubberDuck.MODID, "rubber_duck_place")));
+			() -> SoundEvent.createVariableRangeEvent(new ResourceLocation(RubberDuck.MODID, "rubber_duck_place")));
 }
