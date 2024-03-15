@@ -73,14 +73,11 @@ public class ForgeEventHandler {
     //Generation on chests
     @SubscribeEvent
     public static void onLootLoad(LootTableLoadEvent event) {
-        String chestName = event.getName().toString().substring(0, 16);
-        String wantedName = "minecraft:chests";
-
-        if (chestName.equals(wantedName)) {
+        if (event.getName().toString().startsWith("minecraft:chests")) {
             event.getTable().addPool(LootPool.lootPool()
-                    .add(LootTableReference.lootTableReference(
-                            new ResourceLocation(RubberDuck.MODID, "chests/rubber_duck")))
-                    .build());
+                .add(LootTableReference.lootTableReference(
+                    new ResourceLocation(RubberDuck.MODID, "chests/rubber_duck")))
+                .build());
         }
     }
 }
