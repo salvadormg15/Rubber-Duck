@@ -6,9 +6,12 @@ import com.github.salvadormg15.rubber_duck.RubberDuckItem;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -32,4 +35,11 @@ public class Registries {
 			() -> SoundEvent.createVariableRangeEvent(new ResourceLocation(RubberDuck.MODID, "rubber_duck_use")));
 	public static final RegistryObject<SoundEvent> RUBBER_DUCK_PLACE = SOUND_EVENTS.register("rubber_duck_place",
 			() -> SoundEvent.createVariableRangeEvent(new ResourceLocation(RubberDuck.MODID, "rubber_duck_place")));
+
+    @SubscribeEvent
+    public static void buildContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            event.accept(Registries.RUBBER_DUCK_BLOCK);
+        }
+    }
 }
